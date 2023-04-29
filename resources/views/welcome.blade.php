@@ -28,7 +28,7 @@
         <p class="text-2xl my-6">Only authinticated users can see this page</p>
 
         @if (session()->has('message'))
-            <div class="text-green-500">{{ session()->get('message') }}</div>
+            <div class="text-green-500 my-3">{{ session()->get('message') }}</div>
         @endif
 
         <form method="POST" enctype="multipart/form-data" action="{{ route('store') }}">
@@ -38,7 +38,7 @@
             </label>
             <input name="excel" type="file" required>
             @error('excel')
-                <div class="text-red-500">{{ $message }}</div>
+                <div class="text-red-500  my-3">{{ $message }}</div>
             @enderror
 
             <button class="bg-white text-black p-3 block mx-auto my-3 rounded-lg" type="submit">Submit</button>

@@ -16,7 +16,7 @@ class ExcelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'excel' => 'file'
+            'excel' => 'required|file|mimes:xlsx'
         ]);
 
 
