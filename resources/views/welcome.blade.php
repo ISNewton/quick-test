@@ -18,13 +18,17 @@
     <h1>Dashboard</h1>
     <h2>Only authinticated users can see this page</h2>
 
+    @if (session()->has('message'))
+        <div style="color:green">{{ session()->get('message') }}</div>
+    @endif
+
     <form method="POST" enctype="multipart/form-data" action="{{ route('store') }}">
         @csrf
         <label for="">
             Excel file
         </label>
-        <input name="file" type="file" required>
-        @error('file')
+        <input name="excel" type="file" required>
+        @error('excel')
             <span style="color:red">{{ $message }}</span>
         @enderror
 
