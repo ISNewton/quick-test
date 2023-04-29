@@ -15,5 +15,6 @@
     <body class="">
         <h1>Dashboard</h1>
         <h2>Only authinticated users can see this page</h2>
+        
     </body>
 </html>
