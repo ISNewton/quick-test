@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Str;
+
 
 class RegisteredUserController extends Controller
 {
@@ -31,11 +33,13 @@ class RegisteredUserController extends Controller
      */
     public function store(RegisterRequest $request): RedirectResponse
     {
-        dd(34343);
+        $domain =  Str::afterLast($request->email, '@');
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'domain' => $domain
         ]);
 
         event(new Registered($user));
