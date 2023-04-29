@@ -15,25 +15,37 @@
 </head>
 
 <body class="">
-    <h1>Dashboard</h1>
-    <h2>Only authinticated users can see this page</h2>
+    <x-app-layout>
+        <x-slot name="header">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Dashboard') }}
+            </h2>
+        </x-slot>
 
-    @if (session()->has('message'))
-        <div style="color:green">{{ session()->get('message') }}</div>
-    @endif
+        <div class="text-white text-center ">
 
-    <form method="POST" enctype="multipart/form-data" action="{{ route('store') }}">
-        @csrf
-        <label for="">
-            Excel file
-        </label>
-        <input name="excel" type="file" required>
-        @error('excel')
-            <span style="color:red">{{ $message }}</span>
-        @enderror
+        <p class="text-4xl mt-12">Dashboard</p>
+        <p class="text-2xl my-6">Only authinticated users can see this page</p>
 
-        <button type="submit">Submit</button>
-    </form>
+        @if (session()->has('message'))
+            <div class="text-green-500">{{ session()->get('message') }}</div>
+        @endif
+
+        <form method="POST" enctype="multipart/form-data" action="{{ route('store') }}">
+            @csrf
+            <label for="">
+                Import product excel file
+            </label>
+            <input name="excel" type="file" required>
+            @error('excel')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
+
+            <button class="bg-white text-black p-3 block mx-auto my-3 rounded-lg" type="submit">Submit</button>
+        </form>
+    </div>
+
+    </x-app-layout>
 
 </body>
 
