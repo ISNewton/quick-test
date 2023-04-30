@@ -32,8 +32,6 @@
 
             <form method="POST" enctype="multipart/form-data" action="{{ route('import') }}">
                 @csrf
-                <input type="file" name="excel" value="{{ $excel }}" id="">
-
                 <div>
 
                     <label for="">products</label>

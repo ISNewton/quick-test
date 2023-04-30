@@ -38,7 +38,9 @@ class ExcelController extends Controller
     public function import(Request $request)
     {
 
-        $rows = Excel::import(new ProductImport($request->products, $request->type, $request->qty),  session()->get('excel'));
+        Excel::import(new ProductImport($request->products, $request->type, $request->qty),  session()->get('excel'));
+
+        Storage::delete(session()->get('excel'));
 
         return redirect(route('home'))->with('message', 'Products imported successfully');
     }
