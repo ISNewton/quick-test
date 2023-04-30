@@ -19,9 +19,8 @@ class ExcelController extends Controller
             'excel' => 'required|file|mimes:xlsx'
         ]);
 
+        Excel::import(new ProductImport,  $request->excel);
 
-        Excel::import(new ProductImport ,  $request->excel->store('temp'));
-
-        return back()->with('message' , 'Products imported successfully');
+        return back()->with('message', 'Products imported successfully');
     }
 }

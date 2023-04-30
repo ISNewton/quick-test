@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const STATUS_PENDING = 'PENDING';
+    const STATUS_APPROVED = 'APPROVED';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'domain',
+        'status'
     ];
 
     /**
