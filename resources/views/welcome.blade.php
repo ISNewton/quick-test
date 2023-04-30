@@ -24,26 +24,47 @@
 
         <div class="text-white text-center ">
 
-        <p class="text-4xl mt-12">Dashboard</p>
-        <p class="text-2xl my-6">Only authinticated users can see this page</p>
+            <p class="text-4xl mt-12">Dashboard</p>
+            <p class="text-2xl my-6">Only authinticated users can see this page</p>
 
-        @if (session()->has('message'))
-            <div class="text-green-500 my-3">{{ session()->get('message') }}</div>
-        @endif
+            @if (session()->has('message'))
+                <div class="text-green-500 my-3">{{ session()->get('message') }}</div>
+            @endif
 
-        <form method="POST" enctype="multipart/form-data" action="{{ route('store') }}">
-            @csrf
-            <label for="">
-                Import product excel file
-            </label>
-            <input name="excel" type="file" required>
-            @error('excel')
-                <div class="text-red-500  my-3">{{ $message }}</div>
-            @enderror
+            <form method="POST" enctype="multipart/form-data" action="{{ route('store') }}">
+                @csrf
+                <label for="">
+                    Import product excel file
+                </label>
+                <input name="excel" type="file" required>
+                @error('excel')
+                    <div class="text-red-500  my-3">{{ $message }}</div>
+                @enderror
 
-            <button class="bg-white text-black p-3 block mx-auto my-3 rounded-lg" type="submit">Submit</button>
-        </form>
-    </div>
+                <button class="bg-white text-black p-3 block mx-auto my-3 rounded-lg" type="submit">Submit</button>
+            </form>
+
+            <div class="mt-12">
+                    
+                    
+                <p class="text-4xl mt-12">or approve other accounts:</p>
+                @forelse ($users as $user)
+                    <div>
+
+                        <span class="text-lg">{{ $user->email }}</span>
+                        <form class="inline-block" action="{{ route('approve', $user) }}" method="post">
+                            @csrf
+                            <button class=" bg-green-500 text-white p-3 mx-auto my-3 rounded-lg"
+                                type="submit">Approve</button>
+                        </form>
+
+                    </div>
+                    @empty
+                    <p>No accounts to approve</p>
+                @endforelse
+
+            </div>
+        </div>
 
     </x-app-layout>
 

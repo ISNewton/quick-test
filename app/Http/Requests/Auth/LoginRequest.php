@@ -54,7 +54,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        if ($user->status == User::STATUS_PENDING) {
+        if ($user->status != User::STATUS_APPROVED) {
 
             RateLimiter::hit($this->throttleKey());
 

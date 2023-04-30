@@ -21,6 +21,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/',[ExcelController::class,'index'])->name('home');
     Route::post('/',[ExcelController::class,'store'])->name('store');
+    Route::post('/approve_account/{user}',[ExcelController::class,'approve'])->name('approve');
+
 });
 
 Route::get('/dashboard', function () {
