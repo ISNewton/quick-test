@@ -1,6 +1,9 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
+        @if (session()->has('message'))
+                <div class="text-green-500 my-3">{{ session()->get('message') }}</div>
+            @endif
 
         <!-- Name -->
         <div>
