@@ -45,8 +45,6 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        // Auth::login($user);
-
         return redirect()->back()->with('message', 'Account registered successfully , wait for admin approve');
     }
 }

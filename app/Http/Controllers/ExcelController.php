@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductImport;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class ExcelController extends Controller
 {
@@ -21,9 +22,25 @@ class ExcelController extends Controller
             'excel' => 'required|file|mimes:xlsx'
         ]);
 
-        Excel::import(new ProductImport,  $request->excel);
+        $rows = Excel::toArray([],  $request->excel);
 
-        return back()->with('message', 'Products imported successfully');
+        $headings = $rows[0][0];
+
+        $excel = $request->excel;
+
+        session()->put('excel', $request->file('excel')->store('excel'));
+
+
+        return view('ensure-import-columns', compact('headings', 'excel'));
+    }
+
+
+    public function import(Request $request)
+    {
+
+        $rows = Excel::import(new ProductImport($request->products, $request->type, $request->qty),  session()->get('excel'));
+
+        return redirect(route('home'))->with('message', 'Products imported successfully');
     }
 
     public function approve(User $user)
